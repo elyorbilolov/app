@@ -1,8 +1,25 @@
 const Poster = require("../models/posterModel");
 const User = require("../models/userModel");
+const filtering = require("../utils/filtering");
 
 const getPostersPage = async (req, res) => {
   try {
+    const pagelimit = 10;
+    const limit = parseInt(req.query.limit);
+    const page = parseInt(req.query.page);
+    const total = await Poster.countDocuments();
+
+    if (req.url === "/") {
+      return res.redirect(`?page=1&limit=${pagelimit}`);
+    }
+
+    // Pagination o'zgaruvchisini aniqlash
+    const pagination = {
+      page,
+      limit,
+      pageCount: Math.ceil(total / limit),
+    };
+
     if (req.query.search) {
       const { search } = req.query;
       const posters = await Poster.searchPartial(search, (err, data) => {
@@ -13,14 +30,34 @@ const getPostersPage = async (req, res) => {
         posters: posters.reverse(),
         user: req.session.user,
         querySearch: req.query.search,
+        pagination, // Paginationni qo'shing
       });
     }
 
-    const posters = await Poster.find();
-    res.render("poster/posters", {
+    if (!req.query.page || !req.query.limit) {
+      const { category, from, to, region } = req.query;
+      // $gte $lte $gt $lt
+      const filterings = filtering(category, from, to, region);
+      const posters = await Poster.find(filterings);
+
+      return res.render("poster/searchResults", {
+        title: "Filter results",
+        posters: posters.reverse(),
+        user: req.session.user,
+        querySearch: req.query.search,
+        pagination, // Paginationni qo'shing
+      });
+    }
+
+    const posters = await Poster.find()
+      .skip(page * limit - limit)
+      .limit(limit);
+
+    return res.render("poster/posters", {
       title: "Posters page",
       user: req.session.user,
       posters: posters.reverse(),
+      pagination, // Paginationni qo'shing
     });
   } catch (error) {
     console.log(error);
@@ -40,6 +77,7 @@ const addNewPoster = async (req, res) => {
       title: req.body.title,
       amount: req.body.amount,
       region: req.body.region,
+      category: req.body.category,
       image: "uploads/" + req.file.filename,
       description: req.body.description,
       author: req.session.user._id,
@@ -98,6 +136,7 @@ const updatePoster = async (req, res) => {
       title: req.body.title,
       amount: req.body.amount,
       region: req.body.region,
+      category: req.body.category,
       image: "uploads/" + req.file.filename,
       description: req.body.description,
     };
