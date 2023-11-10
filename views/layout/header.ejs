@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title><%= title %></title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/mystyle.css" rel="stylesheet" />
+    <link href="/css/loginSignUp.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Responsive navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container px-lg-5">
+        <a class="navbar-brand" href="/"
+          ><i class="bi bi-clipboard-check"></i> E'lonlar doskasi</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <% if (user) { %>
+            <li class="nav-item">
+              <a class="nav-link active" href="/posters/add"
+                ><i class="bi bi-plus-square"></i> Yangi e'lon</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile/<%= user._id %>"
+                ><i class="bi bi-layout-text-sidebar-reverse"></i> Mening
+                e'lonlarim</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/logout"
+                ><i class="bi bi-box-arrow-left"></i> Chiqish</a
+              >
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/loginSignUp"
+                ><i class="bi bi-box-arrow-in-right"></i> Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/loginSignUp"
+                ><i class="bi bi-person-plus-fill"></i> Registratsiya</a
+              >
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
