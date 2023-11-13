@@ -1,7 +1,13 @@
 const { Router } = require("express");
 const router = Router();
-const { getProfilePage } = require("../controllers/profileControllers");
+const {
+  getProfilePage,
+  updateUserPage,
+  updateUser,
+} = require("../controllers/profileControllers");
 
+router.get("/change", updateUserPage);
+router.post("/change", updateUser);
 router.get("/:_id", getProfilePage);
 
 module.exports = router;

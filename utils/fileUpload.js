@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const { ensureDir } = require("fs-extra");
 
 // Set storage
 const storage = multer.diskStorage({
