@@ -45,6 +45,7 @@ app.use("/", require("./routes/homeRoutes"));
 app.use("/posters", require("./routes/posterRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/profile", require("./routes/profileRoutes"));
+app.use("/plus-minus", require("./routes/plus-minusRoutes"));
 
 const PORT = process.env.PORT || 5000;
 

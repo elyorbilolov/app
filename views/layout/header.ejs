@@ -13,9 +13,16 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css"
       rel="stylesheet"
     />
+
+    <!-- fontawesome icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/styles.css" rel="stylesheet" />
     <link href="/css/mystyle.css" rel="stylesheet" />
@@ -43,30 +50,29 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <% if (user) { %>
             <li class="nav-item">
-              <a class="nav-link active" href="/posters/add"
-                ><i class="bi bi-plus-square"></i> Yangi e'lon</a
+              <a class="nav-link" href="/plus-minus/PM"
+                ><i class="fa-solid fa-plus-minus"></i> Kirim chiqim</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/posters/add"
+                ><i class="fa-solid fa-square-plus"></i> Yangi e'lon</a
               >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/profile/<%= user._id %>"
-                ><i class="bi bi-layout-text-sidebar-reverse"></i> Mening
-                e'lonlarim</a
+                ><i class="fa-solid fa-address-card"></i> Mening e'lonlarim</a
               >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/auth/logout"
-                ><i class="bi bi-box-arrow-left"></i> Chiqish</a
+                ><i class="fa-solid fa-right-from-bracket"></i> Chiqish</a
               >
             </li>
             <% } else { %>
             <li class="nav-item">
               <a class="nav-link" href="/auth/loginSignUp"
-                ><i class="bi bi-box-arrow-in-right"></i> Login</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/loginSignUp"
-                ><i class="bi bi-person-plus-fill"></i> Registratsiya</a
+                ><i class="fa-solid fa-user-plus"></i> Ro'yxatdan o'tish</a
               >
             </li>
             <% } %>
