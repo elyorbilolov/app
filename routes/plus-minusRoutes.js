@@ -1,7 +1,14 @@
 const { Router } = require("express");
 const router = Router();
-const { getPlusMinusPage } = require("../controllers/plus-minusControllers");
+const {
+  getPlusMinusPage,
+  addNewPlusPage,
+  addNewPlus,
+} = require("../controllers/plus-minusControllers");
+const { protected } = require("../middlewares/auth");
 
-router.get("/PM", getPlusMinusPage);
+router.get("/", protected, getPlusMinusPage);
+router.get("/padd", protected, addNewPlusPage);
+router.post("/padd", protected, addNewPlus);
 
 module.exports = router;

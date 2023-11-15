@@ -1,36 +1,44 @@
 <%- include('../layout/header.ejs') %>
+
+<div class="containers">
+  <div class="plus-minus text-center">
+    <div class="plus">
+      <a class="nav-link" href="/plus-minus/padd"
+        ><i class="fa-solid fa-plus fa-2xl" style="color: #04ff00"></i>
+      </a>
+    </div>
+    <div class="minus">
+      <a class="nav-link" href="#"
+        ><i class="fa-solid fa-minus fa-2xl" style="color: #ff0000"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
 <div class="container">
-  <div class="row my-4">
-    <div class="col-lg-12 mt-5">
-        <button
-          class="btn-close"
-          type="button"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-        <strong></strong>
-      </div>
+  <div class="row my-4 mt-5">
+    <form action="/plus-minus" method="GET">
       <div class="table-responsive">
+        <% if (pms != '') { %>
         <table class="table table-striped text-center my-3">
           <thead>
             <tr class="table-dark">
               <th>ID</th>
-              <th>Image</th>
               <th>Name</th>
-              <th>E-Mail</th>
               <th>Phone</th>
+              <th>Action</th>
+              <th>Action</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
+            <% for (let pm of pms) { %>
             <tr class="align-middle">
-              <td></td>
-              <td>
-                <img src="" width="50" class="img-thumbnail" />
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><%= pm.category %></td>
+              <td><%= pm.title %></td>
+              <td><%= pm.amount %></td>
+              <td><%= pm.region %></td>
+              <td><%= pm.description %></td>
               <td>
                 <a href="" class="text-success"
                   ><i class="fas fa-edit fa-lg mx-1"></i
@@ -40,13 +48,16 @@
                 ></a>
               </td>
             </tr>
+            <% } %>
           </tbody>
         </table>
+        <% } else { %>
         <h1 class="text-center text-secondary mt-5">
           No users found in the database!
         </h1>
+        <% } %>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 
