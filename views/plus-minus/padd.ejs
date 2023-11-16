@@ -6,14 +6,39 @@
       <div class="card p-4 mb-5">
         <form action="/plus-minus/padd" method="POST">
           <div class="mb-3">
-            <label for="title" class="form-label">E'lon sarlavhasi</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Noutbuk Acer"
-              id="title"
-              name="title"
-            />
+            <label for="category" class="form-label">Daromad turi</label>
+            <select
+              class="form-select"
+              id="category"
+              aria-label="Default select example"
+              name="category"
+            >
+              <option selected disabled>Kategoriyani tanlang</option>
+              <option value="Kirim">Kirim</option>
+              <option value="Chiqim">Chiqim</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Daromad turi</label>
+            <select
+              class="form-select"
+              id="name"
+              aria-label="Default select example"
+              name="name"
+            >
+              <option selected disabled>Kategoriyani tanlang</option>
+              <option value="Kunlik maosh">Kunlik maosh</option>
+              <option value="Oylik maosh">Oylik maosh</option>
+              <option value="Avans">Avans</option>
+              <option value="KPI">KPI</option>
+              <option value="Premiya">Premiya</option>
+              <option value="Ro'zg'or">Ro'zg'or</option>
+              <option value="Kamunal tolovlar">Kamunal tolovlar</option>
+              <option value="Abed">Abed</option>
+              <option value="Bezin">Bezin</option>
+              <option value="O'zim uchun">O'zim uchun</option>
+              <option value="Va boshqalar">Va boshqalar</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="amount" class="form-label">Narxi (so'mda)</label>
@@ -24,45 +49,6 @@
               id="amount"
               name="amount"
             />
-          </div>
-
-          <div class="mb-3">
-            <label for="category" class="form-label">Kategoriya</label>
-            <select
-              class="form-select"
-              id="category"
-              aria-label="Default select example"
-              name="category"
-            >
-              <option selected disabled>Kategoriyani tanlang</option>
-              <option value="realty">Ko'chmas Mulk</option>
-              <option value="transport">Transport</option>
-              <option value="electronics">Elektrotexnika</option>
-              <option value="jobs">Ish o'rinlari</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="region" class="form-label">Hudud</label>
-            <select
-              class="form-select"
-              id="region"
-              aria-label="Default select example"
-              name="region"
-            >
-              <option selected disabled>Hududni tanlang</option>
-              <option value="Toshkent">Toshkent</option>
-              <option value="Qarshi">Qarshi</option>
-              <option value="Buxoro">Buxoro</option>
-              <option value="Navoiy">Navoiy</option>
-              <option value="Andijon">Andijon</option>
-              <option value="Namangan">Namangan</option>
-              <option value="Farg'ona">Farg'ona</option>
-              <option value="Guliston">Guliston</option>
-              <option value="Termiz">Termiz</option>
-              <option value="Samarqand">Samarqand</option>
-              <option value="Xorazm">Xorazm</option>
-              <option value="Nukus">Nukus</option>
-            </select>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Tarif</label>

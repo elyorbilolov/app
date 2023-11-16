@@ -17,6 +17,7 @@ const getPostersPage = async (req, res) => {
     const pagination = {
       page,
       limit,
+      pagelimit,
       pageCount: Math.ceil(total / limit),
     };
 

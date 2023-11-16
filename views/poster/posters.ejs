@@ -131,10 +131,10 @@
           <% } %>
         </div>
         <nav aria-label="Page navigation example">
-          <ul class="pagination pagination-lg justify-content-center">
+          <ul class="pagination pagination-xl justify-content-center">
             <% if (pagination.page > 1) { %>
               <li class="page-item">
-                <a class="page-link" href="?page=<%= pagination.page - 1 %>&limit=<%= pagination.limit %>" tabindex="-1" aria-disabled="false">Previous</a>
+                <a class="page-link" href="?page=<%= pagination.page - 1 %>&limit=<%= pagination.pagelimit %>" tabindex="-1" aria-disabled="false">Previous</a>
               </li>
             <% } else { %>
               <li class="page-item disabled">
@@ -144,13 +144,13 @@
             
             <% for (let i = 1; i <= pagination.pageCount; i++) { %>
               <li class="page-item <%= i === pagination.page ? 'active' : '' %>">
-                <a class="page-link" href="?page=<%= i %>&limit=<%= pagination.limit %>"><%= i %></a>
+                <a class="page-link" href="?page=<%= i %>&limit=<%= pagination.pagelimit %>"><%= i %></a>
               </li>
             <% } %>
         
             <% if (pagination.page < pagination.pageCount) { %>
               <li class="page-item">
-                <a class="page-link" href="?page=<%= pagination.page + 1 %>&limit=<%= pagination.limit %>">Next</a>
+                <a class="page-link" href="?page=<%= pagination.page + 1 %>&limit=<%= pagination.pagelimit %>">Next</a>
               </li>
             <% } else { %>
               <li class="page-item disabled">

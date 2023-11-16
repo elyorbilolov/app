@@ -2,27 +2,36 @@ const { Schema, model } = require("mongoose");
 
 const pmSchema = new Schema(
   {
-    title: {
+    category: {
       type: String,
       required: true,
+      enum: ["Kirim", "Chiqim"],
+    },
+    name: {
+      type: String,
+      required: true,
+      enum: [
+        "Kunlik maosh",
+        "Oylik maosh",
+        "Avans",
+        "KPI",
+        "Premiya",
+        "Ro'zg'or",
+        "Kamunal tolovlar",
+        "Abed",
+        "Bezin",
+        "O'zim uchun",
+        "Va boshqalar",
+      ],
     },
     amount: {
       type: Number,
       required: true,
     },
-    region: {
-      type: String,
-      required: true,
-    },
     description: {
       type: String,
-      required: true,
+      required: false,
       min: 50,
-    },
-    category: {
-      type: String,
-      required: true,
-      enum: ["realty", "transport", "electronics", "jobs"],
     },
     author: {
       type: Schema.Types.ObjectId,
