@@ -1,0 +1,115 @@
+<%- include('../layout/header.ejs') %>
+
+<div class="containers">
+  <div class="plus-minus text-center">
+    <div class="plus">
+      <a class="nav-link" href="/plus-minus/padd"
+        ><i class="fa-solid fa-plus-minus fa-2xl"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row my-4 mt-5">
+    <form action="/plus-minus" method="GET">
+      <div class="table-responsive">
+        <% if (pms.length > 0) { %>
+        <table class="table text-center my-3">
+          <thead>
+            <tr class="table-dark text-center">
+              <th>Kiritilgan vaqt</th>
+              <th>Kategoriya</th>
+              <th>Name</th>
+              <th>Narxi</th>
+              <th>Izox</th>
+              <th>tru/false</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let totalAmount = 0; %> <% function formatAmount(amount) { %> <%
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); %>
+            <% } %> <% for (let pm of pms) { %> <% let categoryClass =
+            pm.category === 'Kirim' ? 'bg-success' : (pm.category === 'Chiqim' ?
+            'bg-danger' : ''); %> <% let sign = pm.category === 'Kirim' ? '+' :
+            (pm.category === 'Chiqim' ? '-' : ''); %>
+            <tr class="pm-plus <%= categoryClass %>">
+              <td><%= pm.createdAt.toLocaleString() %></td>
+              <td><%= pm.category %></td>
+              <td><%= pm.name %></td>
+              <td><%= sign %><%- formatAmount(pm.amount) %> so'm</td>
+              <td><%- pm.description %></td>
+              <td>
+                <a href="" class="text-info">
+                  <i class="fas fa-edit fa-lg mx-1"></i>
+                </a>
+                <a href="" class="text-info">
+                  <i class="fas fa-trash fa-lg mx-1"></i>
+                </a>
+              </td>
+            </tr>
+            <% totalAmount += (pm.category === 'Kirim' ? pm.amount :
+            -pm.amount); %> <% } %>
+            <tr class="align-middle">
+              <td colspan="6"></td>
+            </tr>
+            <tr class="align-middle">
+              <td colspan="3"></td>
+              <td>Jami: <%= formatAmount(totalAmount) %> so'm</td>
+              <td colspan="6"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-xl justify-content-end">
+            <% if (pagination.page > 1) { %>
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="?page=<%= pagination.page - 1 %>&limit=<%= pagination.pagelimit %>"
+                tabindex="-1"
+                aria-disabled="false"
+                >Previous</a
+              >
+            </li>
+            <% } else { %>
+            <li class="page-item disabled">
+              <span class="page-link" tabindex="-1" aria-disabled="true"
+                >Previous</span
+              >
+            </li>
+            <% } %> <% for (let i = 1; i <= pagination.pageCount; i++) { %>
+            <li class="page-item <%= i === pagination.page ? 'active' : '' %>">
+              <a
+                class="page-link"
+                href="?page=<%= i %>&limit=<%= pagination.pagelimit %>"
+                ><%= i %></a
+              >
+            </li>
+            <% } %> <% if (pagination.page < pagination.pageCount) { %>
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="?page=<%= pagination.page + 1 %>&limit=<%= pagination.pagelimit %>"
+                >Next</a
+              >
+            </li>
+            <% } else { %>
+            <li class="page-item disabled">
+              <span class="page-link">Next</span>
+            </li>
+            <% } %>
+          </ul>
+        </nav>
+        <% } else { %>
+        <h1 class="text-center text-secondary mt-5">
+          Ma'lumotlar bazasida hech qanday ma'lumot topilmadi!
+        </h1>
+        <% } %>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../layout/footer.ejs') %>
