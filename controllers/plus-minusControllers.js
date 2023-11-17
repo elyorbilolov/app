@@ -6,7 +6,12 @@ const getPlusMinusPage = async (req, res) => {
     const pagelimit = 10;
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
-    const total = await Pm.countDocuments();
+    // Agar foydalanuvchi kirgan bo'lsa
+    if (!req.session.user) {
+      return res.redirect("/login"); // Login sahifasiga yo'naltirish yoki murojaatni noaniq boshqarish
+    }
+
+    const total = await Pm.countDocuments({ author: req.session.user._id });
 
     if (req.url === "/") {
       return res.redirect(`?page=1&limit=${pagelimit}`);
@@ -20,7 +25,7 @@ const getPlusMinusPage = async (req, res) => {
       pageCount: Math.ceil(total / limit),
     };
 
-    const pms = await Pm.find()
+    const pms = await Pm.find({ author: req.session.user._id })
       .sort({ createdAt: -1 }) // Teskari tartibda chiqarish
       .skip(page * limit - limit)
       .limit(limit);
@@ -33,6 +38,8 @@ const getPlusMinusPage = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    // Xatoni qo'llab-quvvatlash, masalan, xatolik javobini yuborish
+    res.status(500).send("Ichki Server Xatosi");
   }
 };
 
